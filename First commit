@@ -1,0 +1,52 @@
+from queue import Queue
+from collections import deque
+
+
+# Task 1
+
+req_q = Queue()
+
+def generate_request(counter):
+    request = f"Request {counter}"
+    req_q.put(request)
+    print(f"Generated: {request}")
+
+def process_request():
+    if not req_q.empty():
+        request = req_q.get()
+        print(f"Processing: {request}")
+    else:
+        print("The queue is empty, no requests to process.")
+
+
+req_count = 0
+
+while True:
+    action = input("Enter 'g' to generate a request, 'p' to process a request, or 'q' to quit: ")
+    if action == 'g':
+        req_count += 1
+        generate_request(req_count)
+    elif action == 'p':
+        process_request()
+    elif action == 'q':
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid input, please enter 'g', 'p', or 'q'.")
+
+
+#Task 2
+
+def is_palindrome(text):
+    clean_string = ''.join(text.split()).lower()
+    char_deque = deque(clean_string)
+
+    while len(char_deque) > 1:
+        if char_deque.popleft() != char_deque.pop():
+            return False
+        
+    return True
+
+print(is_palindrome('Racecar'))
+print(is_palindrome('Otto'))
+print(is_palindrome("Able was I ere I saw Elba"))
